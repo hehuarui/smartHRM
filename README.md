@@ -52,9 +52,10 @@ SmartHRM 是一个基于 Spring Boot 的人力资源管理系统，旨在帮助�
 
 ### 环境要求
 
-- Java 11+
+- Java 17
 - MongoDB
 - Maven
+- SpringBoot 3.x
 
 ### 配置
 
