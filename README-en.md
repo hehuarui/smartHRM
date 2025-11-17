@@ -48,9 +48,10 @@ SmartHRM is a human resource management system based on Spring Boot, designed to
 
 ### Prerequisites
 
-- Java 11+
+- Java 17
 - MongoDB
 - Maven
+- SpringBoot 3.x
 
 ### Configuration
 
