@@ -81,9 +81,10 @@ Contributions and suggestions are welcome! Please follow these steps:
 
 1. Fork this repository.
 2. Create a new branch (`git checkout -b feature/new-feature`).
-3. Commit your changes (`git commit -m 'Add new feature'`).
-4. Push to the remote branch (`git push origin feature/new-feature`).
-5. Submit a Pull Request.
+3. After fetch latest update from remote repository, add your changes to git version control.
+4. Commit your changes (`git commit -m 'Add new feature'`).
+5. Push to the remote branch (`git push origin feature/new-feature`).
+6. Submit a Pull Request.
 
 ## License
 
