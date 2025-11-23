@@ -71,7 +71,7 @@ Visit `http://localhost:8080` to view the system homepage.
 - **Employee Management**: Access the `/employees/` route to add, modify, or delete employee records.
 - **Skill Matching**: Access the `/skillmatch/` route, select required skills, and the system will automatically match eligible employees.
 - **Project Management**: Access the `/projects/` route to manage project information.
-- **Skill Management**: Access the `/skills/` route to manage skill information.
+- **Skill & Training Management**: Access the `/training/` route to manage skill & training information.
 - **Project Matching**: Access the `/projectmatch/` route to fuzzy search project by name or involved employee's id.
 - **Application.yml**: Modify the url of offline or online database. See details in the active .yml file.
 
