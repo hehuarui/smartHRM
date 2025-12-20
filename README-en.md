@@ -22,6 +22,7 @@ SmartHRM is a human resource management system based on Spring Boot, designed to
 ### Core Modules
 
 - **EmployeeController**: Manages employee information.
+- **DepartmentController**: Manages employee information.
 - **SkillMatchController**: Provides skill matching functionality, allowing search for suitable employees based on required project skills.
 - **ProjectController**: Manages project information.
 - **SkillController**: Manages skill information.
@@ -89,3 +90,29 @@ Contributions and suggestions are welcome! Please follow these steps:
 ## License
 
 Not available for now.
+
+## DemoPage（which are style-inconsistent ver.）
+
+### 	**EmployeeController**： `/employees/` 
+
+<img src="pics\employee.png"  />
+
+### 	**DepartmentController**： `/departments/` 
+
+<img src="pics/department.png"  />
+
+### 	**SkillMatchController**： `/skillmatch/` 
+
+![](pics\skillMatch.png)
+
+### 	**ProjectController**： `/projects/`
+
+
+
+### 	**Skill&TrainingController**： `/training/`
+
+![](pics\skill&training.png)
+
+### 	**ProjectMatchController**： `/projectmatch/` 
+
+![](pics\projectMatch.png)

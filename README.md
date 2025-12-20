@@ -18,8 +18,8 @@ SmartHRM 是一个基于 Spring Boot 的人力资源管理系统，旨在帮助�
 
 - Spring Boot
 - MongoDB
-- Thymeleaf (前端模板)
-- Bootstrap & jQuery
+- Thymeleaf (前端模板识别)
+- Bootstrap & jQuery (样式表 + 数据交互 & http请求)
 
 ## 模块说明
 
@@ -73,6 +73,7 @@ mvn spring-boot:run
 ## 使用说明
 
 - **员工管理**：访问 `/employees/` 路由，可进行员工的添加、修改、删除操作。
+- **项目管理**：访问 `/departments/` 路由，可进行项目的添加、修改、删除操作。
 - **技能匹配**：访问 `/skillmatch/` 路由，选择所需技能后，系统将自动匹配符合条件的员工。
 - **项目管理**：访问 `/projects/` 路由，管理项目信息。
 - **技能与训练管理**：访问 `/training/` 路由，管理技能与训练信息。
@@ -93,3 +94,29 @@ mvn spring-boot:run
 ## 许可证
 
 暂无
+
+## 初版演示（未样式统一）
+
+### 	**员工管理**： `/employees/` 
+
+<img src="pics\employee.png"  />
+
+### 	**项目管理**： `/departments/` 
+
+<img src="pics\department.png"  />
+
+### 	**技能匹配**： `/skillmatch/` 
+
+![](pics\skillMatch.png)
+
+### 	**项目管理**： `/projects/`
+
+
+
+### 	**技能与训练管理**： `/training/`
+
+![](pics\skill&training.png)
+
+### 	**项目匹配管理**： `/projectmatch/` 
+
+![](pics\projectMatch.png)
