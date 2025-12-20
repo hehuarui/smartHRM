@@ -107,7 +107,7 @@ mvn spring-boot:run
 
 ### 	**技能匹配**： `/skillmatch/` 
 
-![](pics\skillMatch.png)
+<img src="pics\skillMatch.png"  />
 
 ### 	**项目管理**： `/projects/`
 
@@ -115,8 +115,8 @@ mvn spring-boot:run
 
 ### 	**技能与训练管理**： `/training/`
 
-![](pics\skill&training.png)
+<img src="pics\skill&training.png"  />
 
 ### 	**项目匹配管理**： `/projectmatch/` 
 
-![](pics\projectMatch.png)
+<img src="pics\projectMatch.png"  />
