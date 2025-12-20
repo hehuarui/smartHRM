@@ -196,4 +196,79 @@ public class ProjectMatchServiceImpl implements ProjectMatchService {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public Project createProject(Project project) {
+        if (project == null) {
+            throw new IllegalArgumentException("项目信息不能为空");
+        }
+
+        // 检查项目名称是否重复
+        if (project.getProjName() != null && projectRepo.existsByProjName(project.getProjName())) {
+            throw new IllegalArgumentException("项目名称已存在");
+        }
+
+        // 生成新的ID（如果需要）
+        if (project.getId() == null) {
+            // 获取当前最大ID + 1
+            List<Project> allProjects = projectRepo.findAll();
+            Integer maxId = allProjects.stream()
+                    .map(Project::getId)
+                    .filter(Objects::nonNull)
+                    .max(Integer::compareTo)
+                    .orElse(0);
+            project.setId(maxId + 1);
+        }
+
+        return projectRepo.save(project);
+    }
+
+    @Override
+    public Project updateProject(Project project) {
+        if (project == null || project.getId() == null) {
+            throw new IllegalArgumentException("项目ID和项目信息不能为空");
+        }
+
+        // 检查项目是否存在
+        Project existingProject = projectRepo.findById(project.getId()).orElse(null);
+        if (existingProject == null) {
+            throw new IllegalArgumentException("项目不存在");
+        }
+
+        // 检查项目名称是否重复（排除当前项目）
+        if (project.getProjName() != null && !project.getProjName().equals(existingProject.getProjName())) {
+            if (projectRepo.existsByProjName(project.getProjName())) {
+                throw new IllegalArgumentException("项目名称已存在");
+            }
+        }
+
+        return projectRepo.save(project);
+    }
+
+    @Override
+    public boolean deleteProject(Integer projectId) {
+        if (projectId == null) {
+            return false;
+        }
+
+        // 检查项目是否存在
+        if (!projectRepo.existsById(projectId)) {
+            return false;
+        }
+
+        try {
+            projectRepo.deleteById(projectId);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public Project getProjectById(Integer projectId) {
+        if (projectId == null) {
+            return null;
+        }
+        return projectRepo.findById(projectId).orElse(null);
+    }
 }

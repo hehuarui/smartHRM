@@ -30,4 +30,32 @@ public interface ProjectMatchService {
      * @return 该员工可以参与的项目列表
      */
     List<Project> matchAvailableForEmployee(Integer empId);
+
+    /**
+     * 创建新项目
+     * @param project 项目信息
+     * @return 创建的项目
+     */
+    Project createProject(Project project);
+
+    /**
+     * 更新项目信息
+     * @param project 项目信息
+     * @return 更新后的项目
+     */
+    Project updateProject(Project project);
+
+    /**
+     * 删除项目
+     * @param projectId 项目ID
+     * @return 是否删除成功
+     */
+    boolean deleteProject(Integer projectId);
+
+    /**
+     * 根据ID获取项目详情
+     * @param projectId 项目ID
+     * @return 项目详情
+     */
+    Project getProjectById(Integer projectId);
 }

@@ -83,4 +83,61 @@ public class ProjectMatchController {
         // 这里需要根据实际的部门数据结构调整
         return List.of();
     }
+
+    // ========== 项目管理接口 ==========
+
+    /**
+     * 创建新项目
+     */
+    @PostMapping("/create")
+    @ResponseBody
+    public Project createProject(@RequestBody Project project) {
+        return projectMatchService.createProject(project);
+    }
+
+    /**
+     * 更新项目信息
+     */
+    @PutMapping("/update")
+    @ResponseBody
+    public Project updateProject(@RequestBody Project project) {
+        return projectMatchService.updateProject(project);
+    }
+
+    /**
+     * 删除项目
+     */
+    @DeleteMapping("/delete/{projectId}")
+    @ResponseBody
+    public boolean deleteProject(@PathVariable Integer projectId) {
+        return projectMatchService.deleteProject(projectId);
+    }
+
+    /**
+     * 获取项目详情
+     */
+    @GetMapping("/detail/{projectId}")
+    @ResponseBody
+    public Project getProjectDetail(@PathVariable Integer projectId) {
+        return projectMatchService.getProjectById(projectId);
+    }
+
+    /**
+     * 批量删除项目
+     */
+    @PostMapping("/delete/batch")
+    @ResponseBody
+    public boolean deleteProjectsBatch(@RequestBody List<Integer> projectIds) {
+        if (projectIds == null || projectIds.isEmpty()) {
+            return false;
+        }
+
+        boolean allSuccess = true;
+        for (Integer projectId : projectIds) {
+            if (!projectMatchService.deleteProject(projectId)) {
+                allSuccess = false;
+            }
+        }
+        return allSuccess;
+    }
 }

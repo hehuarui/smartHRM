@@ -4,8 +4,242 @@
     <meta charset="UTF-8">
     <title>项目匹配系统</title>
     <link rel="stylesheet" href="/css/projectmatch.css">
+    <style>
+        /* 新增样式 */
+        .management-panel {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #dee2e6;
+        }
+
+        .management-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #495057;
+        }
+
+        .management-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+            color: #212529;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn-warning:hover {
+            background-color: #e0a800;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn-secondary:hover {
+            background-color: #545b62;
+        }
+
+        .checkbox-col {
+            width: 40px;
+            text-align: center;
+        }
+
+        .action-col {
+            width: 150px;
+            text-align: center;
+        }
+
+        /* 模态框样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #495057;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .form-control:focus {
+            border-color: #007bff;
+            outline: 0;
+            box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .checkbox-group {
+            max-height: 150px;
+            overflow-y: auto;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            padding: 10px;
+        }
+
+        .checkbox-item {
+            margin-bottom: 8px;
+        }
+
+        .checkbox-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .alert {
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+
+        .batch-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #e9ecef;
+            border-radius: 4px;
+        }
+
+        #selectAll {
+            margin-right: 5px;
+        }
+    </style>
 </head>
 <body>
+
+<h2>项目匹配系统</h2>
+
+<!-- 项目管理面板 -->
+<div class="management-panel">
+    <div class="management-title">项目管理</div>
+    <div class="management-buttons">
+        <button class="btn-primary" onclick="showCreateProjectModal()">+ 新增项目</button>
+        <button class="btn-danger" onclick="deleteSelectedProjects()">批量删除</button>
+        <button class="btn-secondary" onclick="refreshData()">刷新数据</button>
+    </div>
+</div>
 
 <h2>项目匹配筛选</h2>
 <p style="color: #666; margin-bottom: 20px;">
@@ -21,9 +255,22 @@
 </form>
 
 <h3>匹配结果</h3>
+
+<!-- 批量操作栏 -->
+<div class="batch-actions" id="batchActions" style="display: none;">
+    <label>
+        <input type="checkbox" id="selectAll" onchange="toggleSelectAll()">
+        全选
+    </label>
+    <span id="selectedCount">已选中 0 项</span>
+</div>
+
 <table id="resultTable">
     <thead>
     <tr>
+        <th class="checkbox-col" id="headerCheckbox" style="display: none;">
+            <input type="checkbox" id="headerSelectAll" onchange="toggleSelectAll()">
+        </th>
         <!-- 新增点击排序 -->
         <th style="cursor:pointer" onclick="toggleSort()">
             id <span id="sortIcon">⇅</span>
@@ -33,13 +280,14 @@
         <th>启动时间</th>
         <th>所需技能</th>
         <th>团队成员</th>
+        <th class="action-col" id="actionHeader" style="display: none;">操作</th>
     </tr>
     </thead>
     <tbody><!-- 动态填充 --></tbody>
     <!-- 分页控制 -->
     <tfoot>
     <tr>
-        <td colspan="5" class="page-bar">
+        <td colspan="7" class="page-bar">
             <button id="btnFirst" onclick="gotoFirst()">首页</button>
             <button id="btnPrev"  onclick="changePage(-1)">上一页</button>
 
@@ -59,7 +307,63 @@
     </tfoot>
 </table>
 
+<!-- 新增/编辑项目模态框 -->
+<div id="projectModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modalTitle">新增项目</h3>
+            <button class="close" onclick="closeProjectModal()">&times;</button>
+        </div>
+
+        <div id="modalAlert" style="display: none;"></div>
+
+        <form id="projectForm">
+            <div class="form-group">
+                <label class="form-label">项目ID</label>
+                <input type="number" id="projectId" class="form-control" readonly>
+                <small class="form-text text-muted">新增时自动生成，编辑时显示</small>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">项目名称 *</label>
+                <input type="text" id="projectName" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">项目状态</label>
+                <select id="projectStatus" class="form-control">
+                    <option value="0">未归档</option>
+                    <option value="1">已归档</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">启动时间</label>
+                <input type="datetime-local" id="startDate" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">所需技能</label>
+                <input type="text" id="projectSkills" class="form-control" placeholder="请输入技能ID，多个技能用逗号分隔（如：1,2,3）">
+                <small class="form-text text-muted">输入技能ID，多个技能用英文逗号分隔</small>
+                <div id="skillPreview" class="skill-preview" style="margin-top: 5px; font-size: 12px; color: #666;"></div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">团队成员</label>
+                <input type="text" id="projectMembers" class="form-control" placeholder="请输入员工ID，多个员工用逗号分隔（如：101,102,103）">
+                <small class="form-text text-muted">输入员工ID，多个员工用英文逗号分隔</small>
+                <div id="memberPreview" class="member-preview" style="margin-top: 5px; font-size: 12px; color: #666;"></div>
+            </div>
+        </form>
+
+        <div class="form-actions">
+            <button type="button" class="btn-secondary" onclick="closeProjectModal()">取消</button>
+            <button type="button" class="btn-primary" onclick="saveProject()">保存</button>
+        </div>
+    </div>
+</div>
+
 <script src="/js/projectmatch.js"></script>
 </body>
 </html>
-<!-- 如果想把结果渲染在页面，把 @ResponseBody 去掉，用 Model 传值，这里加遍历 -->
