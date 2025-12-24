@@ -2,11 +2,9 @@ package com.murasame.smarthrm.entity;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Data
-@Document(collection = "Task")
 public class Task {
 	@Id               // ← 告诉 Spring Data 这是主键
 	@Field("_id")     // ← 强制映射文档字段 "_id"
@@ -14,5 +12,5 @@ public class Task {
 	private Integer projId;     // 外键约束 项目内的任务
 	private String taskName;
 	private Integer managerId;
-	private Integer taskStatus;//0-未完成 1-已完成
+	private Integer taskStatus;
 }
