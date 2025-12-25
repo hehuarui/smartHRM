@@ -21,31 +21,31 @@ import java.util.List;
 @RequiredArgsConstructor
 public class EmployeeDao {
 
-	private final MongoTemplate mongoTemplate;
+    private final MongoTemplate mongoTemplate;
 
-	/*
-	  匹配：skillList 里同时存在
-	  key = skillId, value ≥ minLevel
-	 */
-	public List<Employee> findBySkillsRequired(List<SkillMatchDTO> reqs) {
-		if (CollectionUtils.isEmpty(reqs)) return Collections.emptyList();
+    /*
+      匹配：skillList 里同时存在
+      key = skillId, value ≥ minLevel
+     */
+    public List<Employee> findBySkillsRequired(List<SkillMatchDTO> reqs) {
+        if (CollectionUtils.isEmpty(reqs)) return Collections.emptyList();
 
-		/* 每个 req 转一个 elemMatch */
-		List<Criteria> elemMatchCriterias = reqs.stream()
-				.map(r -> Criteria.where("skillList").elemMatch(
-						Criteria.where("skillId").is(r.getSkillId())
-								.and("proficiency").gte(r.getMinLevel())
-				))
-				.toList();
+        /* 每个 req 转一个 elemMatch */
+        List<Criteria> elemMatchCriterias = reqs.stream()
+                .map(r -> Criteria.where("skillList").elemMatch(
+                        Criteria.where("skillId").is(r.getSkillId())
+                                .and("proficiency").gte(r.getMinLevel())
+                ))
+                .toList();
 
-		Query query = new Query(new Criteria().andOperator(elemMatchCriterias.toArray(new Criteria[0])));
-		return mongoTemplate.find(query, Employee.class);
-	}
-	//修复报错
-	public boolean existsById(Integer id) {
-		Query query = new Query(Criteria.where("_id").is(id));
-		return mongoTemplate.exists(query, Employee.class);
-	}
+        Query query = new Query(new Criteria().andOperator(elemMatchCriterias.toArray(new Criteria[0])));
+        return mongoTemplate.find(query, Employee.class);
+    }
+    //修复报错
+    public boolean existsById(Integer id) {
+        Query query = new Query(Criteria.where("_id").is(id));
+        return mongoTemplate.exists(query, Employee.class);
+    }
 
     /**
      * 根据员工ID查询单个员工信息

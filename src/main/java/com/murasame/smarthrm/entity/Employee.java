@@ -1,5 +1,5 @@
 package com.murasame.smarthrm.entity;
-//林 2025.12.19
+//林 2025.12.24
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -25,4 +25,5 @@ public class Employee {
 
     private String deptName; // 临时部门名称（前端显示用）
     private String deptType; // 临时部门类型（用于前端样式）
+    private List<Map<String, Integer>> tasks;
 }
